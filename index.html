@@ -36,10 +36,6 @@
                     <div class="form-group">
                         <label>State</label>
                         <select class="form-control" id="state" name="state">
-                            <option> Select One </option>
-                            <option value="ca"> California </option>
-                            <option value="ny"> New York   </option>
-                            <option value="tx"> Texas      </option>
                         </select>
                     </div>
 
@@ -74,6 +70,24 @@
         <script>
             
             var usernameAvailable = false;
+            
+            
+            $(document).ready(function () {
+                    $.ajax({
+                            method: "GET",
+                            url: "https://cst336.herokuapp.com/projects/api/state_abbrAPI.php",
+                            dataType: "json",
+                            data: { "state": $("#state").val() },
+                        success: function(result,status) {
+  
+                            $("#state").html("<option> Select One </option>");
+                            for (let i = 0; i < result.length; i++) {
+                                $("#state").append("<option value='" +result[i].usps + "'>" + result[i].state + "</option>");
+                            }
+ 
+                        } 
+                    });//ajax
+                });
             
             //Displaying City from API after typing a zip code
             $("#zip").on("change", async function(){
