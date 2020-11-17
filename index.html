@@ -168,6 +168,7 @@
                 if ($("#username").val().length == 0) {
                     isValid = false;
                     $("#usernameError").html("Username is required");
+                    $("#usernameError").addClass("text-danger").removeClass("text-success");
                 }
                 
                 if ($("#password").val() != $("#passwordAgain").val()){
